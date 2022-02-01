@@ -13,7 +13,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
+  PLATFORMS: linux/amd64,linux/arm64
 
 jobs:
   build:
@@ -25,6 +25,10 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
+      
+    strategy:
+      matrix:
+        python-version: ['3.9']
 
     steps:
       - name: Checkout repository
@@ -74,6 +78,7 @@ jobs:
           platforms: ${{ env.PLATFORMS }}
           build-args: |
             "GCC_VERSION=11"
+            "PYTHON_VERSION=${{ matrix.python-version }}"
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
