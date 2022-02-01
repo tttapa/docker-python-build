@@ -2,7 +2,7 @@
 
 set -ex
 
-versions=( 7 $1 )
+versions=( $1 )
 
 update-alternatives --remove "gcc"        "/usr/bin/gcc"
 update-alternatives --remove "g++"        "/usr/bin/g++"
