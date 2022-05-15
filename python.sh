@@ -10,16 +10,16 @@ prefix="/usr/local"
 
 case $version in 
   3.7)
-    full_version=3.7.12
+    full_version=3.7.13
     python="Python-$full_version";;
   3.8)
-    full_version=3.8.12
+    full_version=3.8.13
     python="Python-$full_version";;
   3.9)
-    full_version=3.9.10
+    full_version=3.9.12
     python="Python-$full_version";;
   3.10)
-    full_version=3.10.2
+    full_version=3.10.4
     python="Python-${full_version}";;
 esac
 
