@@ -7,11 +7,13 @@ set -ex
 version="${1:-3.10}"
 builddir="/tmp"
 prefix="/usr/local"
+opts="--with-lto --enable-optimizations"
 
 case $version in 
   3.7)
     full_version=3.7.13
-    python="Python-$full_version";;
+    python="Python-$full_version"
+    opts="--with-lto";;
   3.8)
     full_version=3.8.13
     python="Python-$full_version";;
@@ -37,7 +39,7 @@ cd "$python"
 ./configure --prefix="$prefix" \
     --enable-ipv6 \
     --enable-shared \
-    --with-lto --enable-optimizations \
+    $opts \
     'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'
 
 make -j$(($(nproc) + 2))
