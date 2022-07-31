@@ -33,3 +33,8 @@ RUN python3 --version
 
 ENV GCC_VERSION=${GCC_VERSION}
 ENV PYTHON_VERSION=${PYTHON_VERSION}
+
+RUN version=3.23.3; \
+    wget https://github.com/Kitware/CMake/releases/download/v$version/cmake-$version-Linux-x86_64.sh && \
+    bash cmake-$version-*.sh --skip-license --prefix="/usr/local" && \
+    rm cmake-$version-*.sh
