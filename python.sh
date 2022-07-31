@@ -16,11 +16,14 @@ case $version in
     full_version=3.8.13
     python="Python-$full_version";;
   3.9)
-    full_version=3.9.12
+    full_version=3.9.13
     python="Python-$full_version";;
   3.10)
-    full_version=3.10.4
+    full_version=3.10.5
     python="Python-${full_version}";;
+  3.11)
+    full_version=3.11.0
+    python="Python-${full_version}b5";;
 esac
 
 # Download and extract the Python source code
