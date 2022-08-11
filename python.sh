@@ -5,8 +5,8 @@
 set -ex
 
 version="${1:-3.10}"
+prefix="${2:-/usr/local}"
 builddir="/tmp"
-prefix="/usr/local"
 opts="--with-lto --enable-optimizations"
 
 case $version in 
@@ -21,21 +21,21 @@ case $version in
     full_version=3.9.13
     python="Python-$full_version";;
   3.10)
-    full_version=3.10.5
+    full_version=3.10.6
     python="Python-${full_version}";;
   3.11)
     full_version=3.11.0
-    python="Python-${full_version}b5";;
+    python="Python-${full_version}rc1";;
 esac
 
 # Download and extract the Python source code
 mkdir -p "$builddir"
-cd $builddir
+pushd "$builddir"
 if [ ! -d "$python" ]; then
     wget -O- "https://www.python.org/ftp/python/$full_version/$python.tgz" | tar -xz
 fi
 
-cd "$python"
+pushd "$python"
 ./configure --prefix="$prefix" \
     --enable-ipv6 \
     --enable-shared \
@@ -45,3 +45,7 @@ cd "$python"
 make -j$(($(nproc) + 2))
 # make altinstall
 make install
+
+popd
+popd
+rm -rf "$builddir"
